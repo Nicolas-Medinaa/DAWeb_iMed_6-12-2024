@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load static %}
+{% block cuerpo %}
+<div class="row">
+  <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+    <h1>Registrar Inventario</h1>
+    <div class="card">
+      <div class="card-body">
+        <form action="{% url 'registrarInventario' %}" method="POST">
+          {% csrf_token %}
+          
+          <div class="form-group">
+            <input type="text" id="txtidinventario" name="txtidinventario" class="form-control" placeholder="ID de Inventario" required>
+          </div>
+
+          <div class="form-group py-3">
+            <input type="number" id="numidempleado" name="numidempleado" class="form-control" placeholder="ID del Empleado" required>
+          </div>
+
+          <div class="form-group py-3">
+            <input type="number" id="numidcelular" name="numidcelular" class="form-control" placeholder="ID del Celular" required>
+          </div>
+
+          <div class="form-group py-3">
+            <input type="date" id="datefecha_inventario" name="datefecha_inventario" class="form-control" required>
+          </div>
+
+          <div class="form-group py-3">
+            <input type="number" id="numcantidad_inventario" name="numcantidad_inventario" class="form-control" placeholder="Cantidad de Inventario" required>
+          </div>
+
+          <div class="form-group py-2">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8">
+    <h1>Listado de Inventarios</h1>
+    <img src="{% static 'img/inventarios.jpg' %}" style="width: 250px;" alt="Ejemplo de imagen">
+
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">ID Inventario</th>
+            <th scope="col">ID Empleado</th>
+            <th scope="col">ID Celular</th>
+            <th scope="col">Fecha Inventario</th>
+            <th scope="col">Cantidad Inventario</th>
+            <th scope="col">-</th>
+            <th scope="col">-</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for inventario in misinventarios %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ inventario.idinventario }}</td>
+            <td>{{ inventario.idempleado }}</td>
+            <td>{{ inventario.idcelular }}</td>
+            <td>{{ inventario.fecha_inventario}}</td>
+            <td>{{ inventario.cantidad_inventario }}</td>
+            <td><a href="seleccionarInventario/{{ inventario.idinventario }}" class="btn btn-success">Editar</a></td>
+            <td><a href="borrarInventario/{{ inventario.idinventario }}" class="btn btn-danger">Borrar</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

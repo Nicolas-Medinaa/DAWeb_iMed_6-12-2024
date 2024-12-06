@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block cuerpo %}
+<div class="row">
+  <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+    <h1>Editar Inventario</h1>
+    <div class="card">
+      <div class="card-body">
+        <form action="{% url 'editarInventario' %}" method="POST">
+          {% csrf_token %}
+          
+          <div class="form-group">
+            <input type="text" id="txtidinventario" name="txtidinventario" class="form-control" value="{{ misinventarios.idinventario }}" readonly required>
+          </div>
+
+          <div class="form-group py-3">
+            <input type="number" id="numidempleado" name="numidempleado" class="form-control" value="{{ misinventarios.idempleado }}" required>
+          </div>
+
+          <div class="form-group py-3">
+            <input type="number" id="numidcelular" name="numidcelular" class="form-control" value="{{ misinventarios.idcelular }}" required>
+          </div>
+
+          <div class="form-group py-3">
+            <input type="date" id="datefecha_inventario" name="datefecha_inventario" class="form-control" value="{{ misinventarios.fecha_inventario|date:'Y-m-d' }}" required>
+          </div>
+
+          <div class="form-group py-3">
+            <input type="number" id="numcantidad_inventario" name="numcantidad_inventario" class="form-control" value="{{ misinventarios.cantidad_inventario }}" required>
+          </div>
+
+          <div class="form-group py-2">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
